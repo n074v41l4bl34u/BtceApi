@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Diagnostics.Contracts;
 
 namespace BtcE.Data
 {
@@ -85,6 +87,8 @@ namespace BtcE.Data
 
     public decimal GetFund(string cur)
     {
+      Contract.Requires<ArgumentNullException>(cur != null);
+
       return (_allValues[cur.ToLowerInvariant()]);
     }
 

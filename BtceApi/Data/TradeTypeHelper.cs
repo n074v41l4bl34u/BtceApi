@@ -1,26 +1,29 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace BtcE.Data
 {
-    public static class TradeTypeHelper
+  public static class TradeTypeHelper
+  {
+    public static TradeType FromString(string s)
     {
-        public static TradeType FromString(string s)
-        {
-            s = s.ToLower();
-            switch (s)
-            {
-                case "sell":
-                    return TradeType.Sell;
-                case "buy":
-                    return TradeType.Buy;
-                default:
-                    throw new ArgumentException();
-            }
-        }
+      Contract.Requires<ArgumentNullException>(s != null);
 
-        public static string ToString(TradeType v)
-        {
-            return Enum.GetName(typeof (TradeType), v).ToLowerInvariant();
-        }
+      s = s.ToLower();
+      switch (s)
+      {
+        case "sell":
+          return TradeType.Sell;
+        case "buy":
+          return TradeType.Buy;
+        default:
+          throw new ArgumentException();
+      }
     }
+
+    public static string ToString(TradeType v)
+    {
+      return Enum.GetName(typeof(TradeType), v).ToLowerInvariant();
+    }
+  }
 }

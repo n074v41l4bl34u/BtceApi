@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Diagnostics.Contracts;
 
 namespace BtcE.Data
 {
@@ -18,6 +19,8 @@ namespace BtcE.Data
 
     public static BtcePair FromString(string s)
     {
+      Contract.Requires<ArgumentNullException>(!string.IsNullOrWhiteSpace(s));
+
       var ret = BtcePair.Unknown;
       Enum.TryParse(s.ToLowerInvariant(), out ret);
       return ret;

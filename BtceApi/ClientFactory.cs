@@ -1,4 +1,6 @@
-﻿namespace BtcE
+﻿using System.Diagnostics.Contracts;
+using System;
+namespace BtcE
 {
     public class ClientFactory : IClientFactory
     {
@@ -16,6 +18,9 @@
 
         public IBtceApiClient CreateClient(string key, string secret)
         {
+          Contract.Requires<ArgumentNullException>(!string.IsNullOrWhiteSpace(key));
+          Contract.Requires<ArgumentNullException>(!string.IsNullOrWhiteSpace(secret));
+
             return new BtceApiClientV3(key, secret, _exchangeHost);
         }
 

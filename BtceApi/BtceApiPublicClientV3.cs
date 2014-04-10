@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics.Contracts;
+using System;
 
 namespace BtcE
 {
@@ -12,11 +14,15 @@ namespace BtcE
 
     public IDictionary<BtcePair, Depth> GetDepth(IEnumerable<BtcePair> pairlist, int limit = 150)
     {
+      Contract.Requires<ArgumentNullException>(pairlist != null);
+
       return BtceApiV3.GetDepth(pairlist.ToArray(), limit);
     }
 
     public IDictionary<BtcePair, Ticker> GetTicker(IEnumerable<BtcePair> pairlist)
     {
+      Contract.Requires<ArgumentNullException>(pairlist != null);
+
       return BtceApiV3.GetTicker(pairlist.ToArray());
     }
 
@@ -32,6 +38,8 @@ namespace BtcE
 
     public IDictionary<BtcePair, List<TradeInfo>> GetTrades(IEnumerable<BtcePair> pairlist, int limit = 150)
     {
+      Contract.Requires<ArgumentNullException>(pairlist != null);
+
       return BtceApiV3.GetTrades(pairlist.ToArray(), limit).ToDictionary(k => k.Key, v => v.Value);
     }
 

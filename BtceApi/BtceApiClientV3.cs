@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace BtcE
 {
@@ -16,6 +17,10 @@ namespace BtcE
         /// <param name="exchangeHost">The exchange host (default: "https://btc-e.com/";).</param>
         public BtceApiClientV3(string key, string secret, string exchangeHost = null)
         {
+          Contract.Requires<ArgumentNullException>(!string.IsNullOrWhiteSpace(key));
+          Contract.Requires<ArgumentNullException>(!string.IsNullOrWhiteSpace(secret));
+          Contract.Requires<ArgumentException>(exchangeHost == null ^ (!string.IsNullOrWhiteSpace(exchangeHost)));
+
             _apiv2 = new BtceApi(key, secret, exchangeHost);
         }
 

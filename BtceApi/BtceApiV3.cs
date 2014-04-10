@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics.Contracts;
 
 namespace BtcE
 {
@@ -39,6 +40,8 @@ namespace BtcE
 
     private static string MakePairListString(BtcePair[] pairlist)
     {
+      Contract.Requires<ArgumentNullException>(pairlist != null);
+
       return string.Join("-", pairlist.Select(x => BtcePairHelper.ToString(x)).ToArray());
     }
 

@@ -60,6 +60,8 @@ namespace BtcE
                                                           Dictionary<string, string> args = null,
                                                           bool ignoreInvalid = true)
     {
+      Contract.Requires<NullReferenceException>(valueReader != null);
+
       string queryresult;
       if (ignoreInvalid)
         queryresult = QueryIgnoreInvalid(method, pairlist, args);
@@ -115,6 +117,9 @@ namespace BtcE
 
     private static Dictionary<BtcePair, T> ReadPairDict<T>(JObject o, Func<JContainer, T> valueReader)
     {
+      Contract.Requires<NullReferenceException>(o != null);
+      Contract.Requires<NullReferenceException>(valueReader != null);
+
       return
           o.OfType<JProperty>()
            .Select(

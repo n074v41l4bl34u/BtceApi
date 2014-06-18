@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BtcE.Utils;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics.Contracts;
 
 namespace BtcE.Data
 {
@@ -39,6 +40,7 @@ namespace BtcE.Data
     {
       get
       {
+        Contract.Assume(_pairs != null);
         return _pairs
           .Where(x => BtcePairHelper.FromString(x.Key) == BtcePair.Unknown)
           .ToDictionary(x => x.Key, x => x.Value);

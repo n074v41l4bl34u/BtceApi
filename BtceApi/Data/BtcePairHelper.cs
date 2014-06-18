@@ -6,7 +6,7 @@ namespace BtcE.Data
 {
   public static class BtcePairHelper
   {
-    [Obsolete("Functionality replaced by BtcePairHelper.GetInfo(BtcePair)", false)]
+    [Obsolete("Functionality replaced by BtcePairHelper.GetInfo(BtcePair)", true)]
     private static readonly Tuple<BtcePair, int, int>[] precisions = new[]
     {
         Tuple.Create(BtcePair.btc_usd, 2, 3),
@@ -32,9 +32,11 @@ namespace BtcE.Data
     /// <param name="btcPair">Btc-E Pair</param>
     /// <returns>Tuple of int,int where Item1 is Amount's precision and Item2 is Price's precision</returns>
 
-    [Obsolete("Functionality replaced by BtcePairHelper.GetInfo(BtcePair)", false)]
+    [Obsolete("Functionality replaced by BtcePairHelper.GetInfo(BtcePair)", true)]
     public static Tuple<int, int> GetPrecision(BtcePair btcPair)
     {
+      throw new NotSupportedException("Method is no longer supported. Use BtcePairHelper.GetInfo(BtcePair) instead.");
+
       Tuple<BtcePair, int, int> pairPrecision = precisions.SingleOrDefault(x => x.Item1 == btcPair);
       if (pairPrecision == default(Tuple<BtcePair, int, int>))
       {
